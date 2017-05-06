@@ -1,0 +1,37 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 6, 2017, 6:52:23 PM
+    Author     : naresh
+*/
+
+body{
+    background-color: #000;
+    color: white;
+}
+.container{
+    width: 158px;
+    height: 230px;
+    border: 1px solid white;
+    float: left;
+    margin: 5px;
+}
+.circle{
+    width: 20px;
+    height: 20px;
+    margin: 6px auto;
+    background-color: gray;
+    border-radius: 12px;
+}
+.greenyellow{
+    background-color: greenyellow;   
+}
+.red{
+    background-color: red;
+}
+.yellow{
+    background-color: yellow;
+}
