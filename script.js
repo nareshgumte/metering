@@ -3,10 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+$(function () {
+    // if user is running mozilla then use it's built-in WebSocket
+    window.WebSocket = window.WebSocket || window.MozWebSocket;
 
-(function (w, d, $) {
+    var connection = new WebSocket('ws://127.0.0.1:1337');
 
-}(window, document, jQuery));
+    connection.onopen = function (c) {
+        console.log('Connection On open', c);
+        // connection is opened and ready to use
+        connection.send(JSON.stringify('Hello Mr Server'));
+    };
+
+    connection.onerror = function (error) {
+        console.log('Connection On Error', error);
+        // an error occurred when sending/receiving data
+    };
+
+    connection.onmessage = function (message) {
+        // try to decode json (I assume that each message from server is json)
+        try {
+            var json = JSON.parse(message.data);
+        } catch (e) {
+            console.log('This doesn\'t look like a valid JSON: ', message.data);
+            return;
+        }
+        console.log('Message from Server ');
+        console.log(json.length); 
+                // handle incoming message
+    };
+    connection.onclose = function (message) {
+        console.log('Connection onclose::');
+    }
+
+
+});
 var listBins = [];
 for (var i = 0; i < 2; i++) {
     for (var j = 0; j < 2; j++) {
@@ -28,48 +59,22 @@ for (var i = 0; i < 2; i++) {
 
 
 
-function initiateWebConnection() {
-    var wuri = 'ws://127.0.0.1:3434';
-    var socket = new WebSocket(wuri);
-    socket.onopen = function (e) {
-        console.log('Connection Opend', e);
-        // socket.send('Hello Mr Webserver');
-    };
-    socket.onmessage = function (e) {
-        console.log('Message received form Client', e);
-    };
-    socket.onclose = function (e) {
-        console.log('Connection Closed', e);
-
-    };
-    socket.onerror = function (e) {
-        console.log('Connection Onerror', e);
-    };
-}
-// initiateWebConnection();
 
 function renderMeters(cnt) {
     $('#meters').html('');
     for (var i = 1; i <= cnt; i++) {
         var cl = $('.con').clone().show().removeClass('con').attr('id', 'samplemeter' + i);
-        console.log(cl);
         $('#meters').append(cl);
     }
 }
-var cnt = 200;
+var cnt = 150;
 setTimeout(function () {
     renderMeters(cnt);
-}, 1000);
+}, 200);
 var intervala = [];
 var intervalrfa = [];
 var intervalrfb = [];
-function stopBlinking() {
-    for (var j = 0; j < intervala.length; j++) {
-        clearInterval(intervala[j]);
-        clearInterval(intervalrfa[j]);
-        clearInterval(intervalrfb[j]);
-    }
-}
+
 function clearClass(cls, i) {
     $('#samplemeter' + i).find('.' + cls + ' .greenyellow').removeClass('greenyellow')
     $('#samplemeter' + i).find('.' + cls + ' .red').removeClass('red')
@@ -212,5 +217,12 @@ function blink(i) {
 function startBlinking() {
     for (var i = 1; i <= cnt; i++) {
         blink(i);
+    }
+}
+function stopBlinking() {
+    for (var j = 0; j < intervala.length; j++) {
+        clearInterval(intervala[j]);
+        clearInterval(intervalrfa[j]);
+        clearInterval(intervalrfb[j]);
     }
 }

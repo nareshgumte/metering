@@ -1,0 +1,11 @@
+{
+  "name": "metering", "version": "1.0.0", "description": "Sample Practice Node Webscoket Example", "main": "jquery-3.2.1.js", "dependencies": {
+    "fs": "^0.0.1-security", "websocket": "^1.0.24", "ws": "^2.3.1"
+  }, "devDependencies": {}, "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }, "repository": {
+    "type": "git", "url": "git+https://nareshgumte@github.com/nareshgumte/metering.git"
+  }, "author": "NG", "license": "ISC", "bugs": {
+    "url": "https://github.com/nareshgumte/metering/issues"
+  }, "homepage": "https://github.com/nareshgumte/metering#readme"
+}
