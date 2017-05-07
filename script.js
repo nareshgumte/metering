@@ -60,16 +60,23 @@ var cnt = 200;
 setTimeout(function () {
     renderMeters(cnt);
 }, 1000);
-var interval = [];
+var intervala = [];
+var intervalrfa = [];
+var intervalrfb = [];
 function stopBlinking() {
-    for (var j = 0; j < interval.length; j++) {
-        clearInterval(interval[j]);
+    for (var j = 0; j < intervala.length; j++) {
+        clearInterval(intervala[j]);
+        clearInterval(intervalrfa[j]);
+        clearInterval(intervalrfb[j]);
     }
 }
-function render(n, i) {
-    $('#samplemeter' + i).find('.greenyellow').removeClass('greenyellow')
-    $('#samplemeter' + i).find('.red').removeClass('red')
-    $('#samplemeter' + i).find('.yellow').removeClass('yellow')
+function clearClass(cls, i) {
+    $('#samplemeter' + i).find('.' + cls + ' .greenyellow').removeClass('greenyellow')
+    $('#samplemeter' + i).find('.' + cls + ' .red').removeClass('red')
+    $('#samplemeter' + i).find('.' + cls + ' .yellow').removeClass('yellow')
+}
+function renderAudio(n, i) {
+    clearClass('audio', i);
     if (n) {
         if (n[7] == 1)
             $('#samplemeter' + i).find('.a1').addClass('greenyellow');
@@ -90,28 +97,115 @@ function render(n, i) {
     }
 
 }
+function renderRFA(n, i) {
+    clearClass('rfa', i);
+    if (n) {
+        if (n[7] == 1)
+            $('#samplemeter' + i).find('.rfa1').addClass('greenyellow');
+        if (n[6] == 1)
+            $('#samplemeter' + i).find('.rfa2').addClass('greenyellow');
+        if (n[5] == 1)
+            $('#samplemeter' + i).find('.rfa3').addClass('greenyellow');
+        if (n[4] == 1)
+            $('#samplemeter' + i).find('.rfa4').addClass('greenyellow');
+        if (n[3] == 1)
+            $('#samplemeter' + i).find('.rfa5').addClass('yellow');
+        if (n[2] == 1)
+            $('#samplemeter' + i).find('.rfa6').addClass('yellow');
+        if (n[1] == 1)
+            $('#samplemeter' + i).find('.rfa7').addClass('red');
+        if (n[0] == 1)
+            $('#samplemeter' + i).find('.rfa8').addClass('red');
+    }
+}
+function renderRFB(n, i) {
+    clearClass('rfb', i);
+    if (n) {
+        if (n[7] == 1)
+            $('#samplemeter' + i).find('.rfb1').addClass('greenyellow');
+        if (n[6] == 1)
+            $('#samplemeter' + i).find('.rfb2').addClass('greenyellow');
+        if (n[5] == 1)
+            $('#samplemeter' + i).find('.rfb3').addClass('greenyellow');
+        if (n[4] == 1)
+            $('#samplemeter' + i).find('.rfb4').addClass('greenyellow');
+        if (n[3] == 1)
+            $('#samplemeter' + i).find('.rfb5').addClass('yellow');
+        if (n[2] == 1)
+            $('#samplemeter' + i).find('.rfb6').addClass('yellow');
+        if (n[1] == 1)
+            $('#samplemeter' + i).find('.rfb7').addClass('red');
+        if (n[0] == 1)
+            $('#samplemeter' + i).find('.rfb8').addClass('red');
+    }
+}
 
-var fps = 40;
-var interval = 1000 / fps;
+var fps = 30;
+var interval1 = 1000 / fps;
+var nosec = 100;
 
+function audio(ai, reg) {
+    if (!reg) {
+        intervala[ai] = setInterval(function () {
+            var audio = Math.floor(Math.random() * ((256 - 1) + 1) + 1);
+            renderAudio(listBins[audio], ai);
+        }, nosec);
+    } else {
+        var audio = Math.floor(Math.random() * ((256 - 1) + 1) + 1);
+        renderAudio(listBins[audio], i);
+        window.requestAnimationFrame(blink.bind('a', i));
+    }
+}
+function rfa(bi, reg) {
+    if (!reg) {
+        intervalrfa[bi] = setInterval(function () {
+            var rfa = Math.floor(Math.random() * ((256 - 1) + 1) + 1);
+            renderRFA(listBins[rfa], bi);
+        }, nosec);
+    } else {
+        var rfa = Math.floor(Math.random() * ((256 - 1) + 1) + 1);
+        renderRFA(listBins[rfa], i);
+        window.requestAnimationFrame(blink.bind('a', i));
+    }
+}
+function rfb(ci, reg) {
+    if (!reg) {
+        intervalrfb[ci] = setInterval(function () {
+            var rfb = Math.floor(Math.random() * ((256 - 1) + 1) + 1);
+            renderRFB(listBins[rfb], ci);
+        }, nosec);
+    } else {
+        var rfb = Math.floor(Math.random() * ((256 - 1) + 1) + 1);
+        renderRFB(listBins[rfb], i);
+        window.requestAnimationFrame(blink.bind('a', i));
+    }
+
+}
 function usingSetInterval(i) {
-    interval[i] = setInterval(function () {
-        var n = Math.floor(Math.random() * ((256 - 1) + 1) + 1);
-        render(listBins[n], i);
-    }, 100);
+
+    audio(i, false);
+    rfa(i, false);
+    rfb(i, false);
+
 }
 function usingRequestAni(i) {
 
     setTimeout(function () {
-        var n = Math.floor(Math.random() * ((256 - 1) + 1) + 1);
-        render(listBins[n], i);
-        window.requestAnimationFrame(blink.bind('a', i));
-    }, interval);
+        audio(i, true);
+    }, interval1);
+    setTimeout(function () {
+        rfa(i, true);
+
+    }, interval1);
+    setTimeout(function () {
+        rfb(i, true);
+
+    }, interval1);
 }
 
 function blink(i) {
-    // usingSetInterval(i); 
-    usingRequestAni(i);
+    usingSetInterval(i);
+    //  usingRequestAni(i);
 
 }
 
