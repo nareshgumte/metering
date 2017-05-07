@@ -7,6 +7,27 @@
 (function (w, d, $) {
 
 }(window, document, jQuery));
+var listBins = [];
+for (var i = 0; i < 2; i++) {
+    for (var j = 0; j < 2; j++) {
+        for (var k = 0; k < 2; k++) {
+            for (var l = 0; l < 2; l++) {
+                for (var m = 0; m < 2; m++) {
+                    for (var n = 0; n < 2; n++) {
+                        for (var o = 0; o < 2; o++) {
+                            for (var p = 0; p < 2; p++) {
+                                listBins.push("" + i + j + k + l + m + n + o + p);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
 function initiateWebConnection() {
     var wuri = 'ws://127.0.0.1:3434';
     var socket = new WebSocket(wuri);
@@ -35,7 +56,7 @@ function renderMeters(cnt) {
         $('#meters').append(cl);
     }
 }
-var cnt = 150;
+var cnt = 200;
 setTimeout(function () {
     renderMeters(cnt);
 }, 1000);
@@ -49,25 +70,34 @@ function render(n, i) {
     $('#samplemeter' + i).find('.greenyellow').removeClass('greenyellow')
     $('#samplemeter' + i).find('.red').removeClass('red')
     $('#samplemeter' + i).find('.yellow').removeClass('yellow')
-    var classname;
-    if (n <= 4) {
-        classname = 'greenyellow';
-    } else if (n == 5 || n == 6 || n == 7) {
-        classname = 'yellow';
-    } else if (n == 8) {
-        classname = 'red';
-    }
-    $('#samplemeter' + i).find('.a' + n).addClass(classname);
+ 
+    if (n[0] == 1)
+        $('#samplemeter' + i).find('.a8').addClass('red');
+    if (n[1] == 1)
+        $('#samplemeter' + i).find('.a7').addClass('yellow');
+    if (n[2] == 1)
+        $('#samplemeter' + i).find('.a6').addClass('yellow');
+    if (n[3] == 1)
+        $('#samplemeter' + i).find('.a5').addClass('yellow');
+    if (n[4] == 1)
+        $('#samplemeter' + i).find('.a4').addClass('greenyellow');
+    if (n[5] == 1)
+        $('#samplemeter' + i).find('.a3').addClass('greenyellow');
+    if (n[6] == 1)
+        $('#samplemeter' + i).find('.a2').addClass('greenyellow');
+    if (n[7] == 1)
+        $('#samplemeter' + i).find('.a1').addClass('greenyellow');
+
+
 }
-function callthis(i) {
+function blink(i) {
     interval[i] = setInterval(function () {
-        var n = Math.floor(Math.random() * ((8 - 1) + 1) + 1);
-        render(n, i);
+        var n = Math.floor(Math.random() * ((256 - 1) + 1) + 1);
+        render(listBins[n], i);
     }, 100);
 }
 function startBlinking() {
     for (var i = 1; i <= cnt; i++) {
-        var l = i;
-        callthis(i);
+        blink(i);
     }
 }
