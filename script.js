@@ -70,23 +70,24 @@ function render(n, i) {
     $('#samplemeter' + i).find('.greenyellow').removeClass('greenyellow')
     $('#samplemeter' + i).find('.red').removeClass('red')
     $('#samplemeter' + i).find('.yellow').removeClass('yellow')
- 
-    if (n[0] == 1)
-        $('#samplemeter' + i).find('.a8').addClass('red');
-    if (n[1] == 1)
-        $('#samplemeter' + i).find('.a7').addClass('yellow');
-    if (n[2] == 1)
-        $('#samplemeter' + i).find('.a6').addClass('yellow');
-    if (n[3] == 1)
-        $('#samplemeter' + i).find('.a5').addClass('yellow');
-    if (n[4] == 1)
-        $('#samplemeter' + i).find('.a4').addClass('greenyellow');
-    if (n[5] == 1)
-        $('#samplemeter' + i).find('.a3').addClass('greenyellow');
-    if (n[6] == 1)
-        $('#samplemeter' + i).find('.a2').addClass('greenyellow');
+
     if (n[7] == 1)
         $('#samplemeter' + i).find('.a1').addClass('greenyellow');
+    if (n[6] == 1)
+        $('#samplemeter' + i).find('.a2').addClass('greenyellow');
+    if (n[5] == 1)
+        $('#samplemeter' + i).find('.a3').addClass('greenyellow');
+    if (n[4] == 1)
+        $('#samplemeter' + i).find('.a4').addClass('greenyellow');
+    if (n[3] == 1)
+        $('#samplemeter' + i).find('.a5').addClass('yellow');
+    if (n[2] == 1)
+        $('#samplemeter' + i).find('.a6').addClass('yellow');
+    if (n[1] == 1)
+        $('#samplemeter' + i).find('.a7').addClass('yellow');
+    if (n[0] == 1)
+        $('#samplemeter' + i).find('.a8').addClass('red');
+
 
 
 }
