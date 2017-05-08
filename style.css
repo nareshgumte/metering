@@ -13,7 +13,7 @@ body{
     color: white;
 }
 .container{
-    width: 158px;
+    width: 154px;
     height: 280px;
     border: 1px solid white;
     float: left;
@@ -34,6 +34,13 @@ body{
 }
 .yellow{
     background-color: yellow;
+}
+.blue{
+    background-color: blue;
+
+}
+.orange{
+    background-color: darkorange
 }
 .text{
     height: 20px;

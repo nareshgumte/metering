@@ -16,6 +16,13 @@ server.listen(1337, function () { });
 wsServer = new WebSocketServer({
     httpServer: server
 });
+
+var desiredcnt = 150;
+var timeinmillisec = 250;
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 var listBins = [];
 for (var i = 0; i < 2; i++) {
     for (var j = 0; j < 2; j++) {
@@ -26,10 +33,19 @@ for (var i = 0; i < 2; i++) {
                         for (var o = 0; o < 2; o++) {
                             for (var p = 0; p < 2; p++) {
                                 listBins.push(
-                                        {
-                                            'deviceuid': Math.random(),
-                                            'bitpattern': "" + i + j + k + l + m + n + o + p
+                                    {
+                                        'deviceuid': getRandomInt(1111111, 9999999),
+                                        'audio': {
+                                            'bitpattern': "" + i + j + k + l + m + n + o + p,
+                                            'audioLed': '',
+                                            'peakLed': ''
+                                        },
+                                        'rf': {
+                                            'bitpattern': "" + i + j + k + l + m + n + o + p,
+                                            'antenaLEDA': getRandomInt(0, 1),
+                                            'antenaLEDB': getRandomInt(0, 1)
                                         }
+                                    }
                                 );
                             }
                         }
@@ -39,10 +55,10 @@ for (var i = 0; i < 2; i++) {
         }
     }
 }
+
 // WebSocket server
 wsServer.on('request', function (request) {
     var connection = request.accept(null, request.origin);
-
     // This is the most important callback for us, we'll handle
     // all messages from users here.
     connection.on('message', function (message) {
@@ -50,13 +66,13 @@ wsServer.on('request', function (request) {
         if (message.type === 'utf8') {
             // process WebSocket message
             setInterval(function () {
-                connection.send(JSON.stringify(listBins.slice(0, 50)));
-            }, 100);
+                const suff = listBins.sort(() => 0.5 - Math.random());
+                connection.send(JSON.stringify(suff.slice(0, desiredcnt)));
+            }, timeinmillisec);
         }
     });
 
     connection.on('close', function (connection) {
         console.log('Connection Closed....');
-        // close user connection
     });
 });
