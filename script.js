@@ -65,7 +65,11 @@ var cnt = 20;
 var fps = 30;
 var interval1 = 1000 / fps;
 var nosec = 300;
-
+var orange = 'orange';
+var blue = 'blue';
+var greenyellow = 'greenyellow';
+var red = 'red';
+var yellow = 'yellow';
 
 function renderMeters(len) {
     var cnt = len;
@@ -85,72 +89,117 @@ var intervalrfa = [];
 var intervalrfb = [];
 
 function clearClass(cls, i) {
-    $('#samplemeter' + i).find('.' + cls + ' .greenyellow').removeClass('greenyellow');
-    $('#samplemeter' + i).find('.' + cls + ' .red').removeClass('red');
-    $('#samplemeter' + i).find('.' + cls + ' .yellow').removeClass('yellow');
-    $('#samplemeter' + i).find('.' + cls + ' .orange').removeClass('orange');
-    $('#samplemeter' + i).find('.' + cls + ' .blue').removeClass('blue');
+    $('#samplemeter' + i).find('.' + cls + ' .greenyellow').removeClass(greenyellow);
+    $('#samplemeter' + i).find('.' + cls + ' .red').removeClass(red);
+    $('#samplemeter' + i).find('.' + cls + ' .yellow').removeClass(yellow);
+    $('#samplemeter' + i).find('.' + cls + ' .orange').removeClass(orange);
+    $('#samplemeter' + i).find('.' + cls + ' .blue').removeClass(blue);
 }
 function renderAudio(n, i) {
     clearClass('audio', i);
     if (n) {
         if (n[7] == 1)
-            $('#samplemeter' + i).find('.a1').addClass('greenyellow');
+            $('#samplemeter' + i).find('.a1').addClass(greenyellow);
         if (n[6] == 1)
-            $('#samplemeter' + i).find('.a2').addClass('greenyellow');
+            $('#samplemeter' + i).find('.a2').addClass(greenyellow);
         if (n[5] == 1)
-            $('#samplemeter' + i).find('.a3').addClass('greenyellow');
+            $('#samplemeter' + i).find('.a3').addClass(greenyellow);
         if (n[4] == 1)
-            $('#samplemeter' + i).find('.a4').addClass('greenyellow');
+            $('#samplemeter' + i).find('.a4').addClass(greenyellow);
         if (n[3] == 1)
-            $('#samplemeter' + i).find('.a5').addClass('yellow');
+            $('#samplemeter' + i).find('.a5').addClass(yellow);
         if (n[2] == 1)
-            $('#samplemeter' + i).find('.a6').addClass('yellow');
+            $('#samplemeter' + i).find('.a6').addClass(yellow);
         if (n[1] == 1)
-            $('#samplemeter' + i).find('.a7').addClass('yellow');
+            $('#samplemeter' + i).find('.a7').addClass(yellow);
         if (n[0] == 1)
-            $('#samplemeter' + i).find('.a8').addClass('red');
+            $('#samplemeter' + i).find('.a8').addClass(red);
     }
 
 }
 function renderRFA(n, i, rfac) {
+    var rfcls = 'rfa';
     clearClass('rfa', i);
     if (n) {
-        if (n[7] == 1)
-            $('#samplemeter' + i).find('.rfa1').addClass('orange');
-        if (n[6] == 1)
-            $('#samplemeter' + i).find('.rfa2').addClass('orange');
-        if (n[5] == 1)
-            $('#samplemeter' + i).find('.rfa3').addClass('orange');
-        if (n[4] == 1)
-            $('#samplemeter' + i).find('.rfa4').addClass('orange');
-        if (n[3] == 1)
-            $('#samplemeter' + i).find('.rfa5').addClass('yellow');
-        if (n[2] == 1)
-            $('#samplemeter' + i).find('.rfa6').addClass('yellow');
-        if (rfac.antenaLEDA == 1)
-            $('#samplemeter' + i).find('.rfa7').addClass('blue');
+        if (n[7] == 1) {
+            $('#samplemeter' + i).find('.rfa1').addClass(orange);
+            renderUnderneeth(7, i, rfcls);
+        }
+        if (n[6] == 1) {
+            $('#samplemeter' + i).find('.rfa2').addClass(orange);
+            renderUnderneeth(6, i, rfcls);
+        }
+        if (n[5] == 1) {
+            $('#samplemeter' + i).find('.rfa3').addClass(orange);
+            renderUnderneeth(5, i, rfcls);
+        }
+        if (n[4] == 1) {
+            $('#samplemeter' + i).find('.rfa4').addClass(orange);
+            renderUnderneeth(4, i, rfcls);
+        }
+        if (n[3] == 1) {
+            $('#samplemeter' + i).find('.rfa5').addClass(yellow);
+            renderUnderneeth(3, i, rfcls);
+        }
+        if (n[2] == 1) {
+            $('#samplemeter' + i).find('.rfa6').addClass(yellow);
+            renderUnderneeth(2, i, rfcls);
+        }
+        if (rfac.antenaLEDA == 1) {
+            $('#samplemeter' + i).find('.rfa7').addClass(blue);
+        }
     }
 }
 function renderRFB(n, i, rfbc) {
+    var rfcls = 'rfb';
     clearClass('rfb', i);
     if (n) {
-        if (n[7] == 1)
-            $('#samplemeter' + i).find('.rfb1').addClass('orange');
-        if (n[6] == 1)
-            $('#samplemeter' + i).find('.rfb2').addClass('orange');
-        if (n[5] == 1)
-            $('#samplemeter' + i).find('.rfb3').addClass('orange');
-        if (n[4] == 1)
-            $('#samplemeter' + i).find('.rfb4').addClass('orange');
-        if (n[3] == 1)
-            $('#samplemeter' + i).find('.rfb5').addClass('yellow');
-        if (n[2] == 1)
-            $('#samplemeter' + i).find('.rfb6').addClass('yellow');
-        if (rfbc.antenaLEDB == 1)
-            $('#samplemeter' + i).find('.rfb7').addClass('blue');
+        if (n[7] == 1) {
+            $('#samplemeter' + i).find('.rfb1').addClass(orange);
+            renderUnderneeth(7, i, rfcls);
+        }
+        if (n[6] == 1) {
+            $('#samplemeter' + i).find('.rfb2').addClass(orange);
+            renderUnderneeth(6, i, rfcls);
+        }
+        if (n[5] == 1) {
+            $('#samplemeter' + i).find('.rfb3').addClass(orange);
+            renderUnderneeth(5, i, rfcls);
+        }
+        if (n[4] == 1) {
+            $('#samplemeter' + i).find('.rfb4').addClass(orange);
+            renderUnderneeth(4, i, rfcls);
+        }
+        if (n[3] == 1) {
+            $('#samplemeter' + i).find('.rfb5').addClass(yellow);
+            renderUnderneeth(3, i, rfcls);
+        }
+        if (n[2] == 1) {
+            $('#samplemeter' + i).find('.rfb6').addClass(yellow);
+            renderUnderneeth(2, i, rfcls);
+        }
+        if (rfbc.antenaLEDB == 1) {
+            $('#samplemeter' + i).find('.rfb7').addClass(blue);
+        }
     }
 }
+function renderUnderneeth(c, j, cls) {
+    for (var o = 1; o < c; o++) {
+        $('#samplemeter' + j).find('.' + cls + o).addClass(getColor(o));
+    }
+}
+function getColor(v) {
+    var clr = greenyellow;
+    if (4 >= v <= 7) {
+        clr = orange;
+    } else if (v == 3 || v == 2) {
+        clr = yellow;
+    } else if (v == 1) {
+        clr = red;
+    }
+    return clr;
+}
+
 
 
 
