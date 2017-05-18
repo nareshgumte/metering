@@ -99,21 +99,21 @@ function renderAudio(n, i) {
     clearClass('audio', i);
     if (n) {
         if (n[7] == 1)
-            $('#samplemeter' + i).find('.a1').addClass(greenyellow);
+            $('#samplemeter' + i).find('.areplacelater').addClass(greenyellow);
         if (n[6] == 1)
-            $('#samplemeter' + i).find('.a2').addClass(greenyellow);
+            $('#samplemeter' + i).find('.areplacelater').addClass(greenyellow);
         if (n[5] == 1)
-            $('#samplemeter' + i).find('.a3').addClass(greenyellow);
+            $('#samplemeter' + i).find('.a1').addClass(greenyellow);
         if (n[4] == 1)
-            $('#samplemeter' + i).find('.a4').addClass(greenyellow);
+            $('#samplemeter' + i).find('.a2').addClass(greenyellow);
         if (n[3] == 1)
-            $('#samplemeter' + i).find('.a5').addClass(yellow);
+            $('#samplemeter' + i).find('.a3').addClass(greenyellow);
         if (n[2] == 1)
-            $('#samplemeter' + i).find('.a6').addClass(yellow);
+            $('#samplemeter' + i).find('.a4').addClass(yellow);
         if (n[1] == 1)
-            $('#samplemeter' + i).find('.a7').addClass(yellow);
+            $('#samplemeter' + i).find('.a5').addClass(yellow);
         if (n[0] == 1)
-            $('#samplemeter' + i).find('.a8').addClass(red);
+            $('#samplemeter' + i).find('.a6').addClass(red);
     }
 
 }
@@ -122,31 +122,31 @@ function renderRFA(n, i, rfac) {
     clearClass('rfa', i);
     if (n) {
         if (n[7] == 1) {
-            $('#samplemeter' + i).find('.rfa1').addClass(orange);
+            $('#samplemeter' + i).find('.rfa1replacelater').addClass(orange);
             renderUnderneeth(7, i, rfcls);
         }
         if (n[6] == 1) {
-            $('#samplemeter' + i).find('.rfa2').addClass(orange);
+            $('#samplemeter' + i).find('.rfa1').addClass(orange);
             renderUnderneeth(6, i, rfcls);
         }
         if (n[5] == 1) {
-            $('#samplemeter' + i).find('.rfa3').addClass(orange);
+            $('#samplemeter' + i).find('.rfa2').addClass(orange);
             renderUnderneeth(5, i, rfcls);
         }
         if (n[4] == 1) {
-            $('#samplemeter' + i).find('.rfa4').addClass(orange);
+            $('#samplemeter' + i).find('.rfa3').addClass(orange);
             renderUnderneeth(4, i, rfcls);
         }
         if (n[3] == 1) {
-            $('#samplemeter' + i).find('.rfa5').addClass(yellow);
+            $('#samplemeter' + i).find('.rfa4').addClass(orange);
             renderUnderneeth(3, i, rfcls);
         }
         if (n[2] == 1) {
-            $('#samplemeter' + i).find('.rfa6').addClass(yellow);
+            $('#samplemeter' + i).find('.rfa5').addClass(yellow);
             renderUnderneeth(2, i, rfcls);
         }
         if (rfac.antenaLEDA == 1) {
-            $('#samplemeter' + i).find('.rfa7').addClass(blue);
+            $('#samplemeter' + i).find('.rfa6').addClass(blue);
         }
     }
 }
@@ -155,31 +155,31 @@ function renderRFB(n, i, rfbc) {
     clearClass('rfb', i);
     if (n) {
         if (n[7] == 1) {
-            $('#samplemeter' + i).find('.rfb1').addClass(orange);
+            $('#samplemeter' + i).find('.rfb1replacelater').addClass(orange);
             renderUnderneeth(7, i, rfcls);
         }
         if (n[6] == 1) {
-            $('#samplemeter' + i).find('.rfb2').addClass(orange);
+            $('#samplemeter' + i).find('.rfb1').addClass(orange);
             renderUnderneeth(6, i, rfcls);
         }
         if (n[5] == 1) {
-            $('#samplemeter' + i).find('.rfb3').addClass(orange);
+            $('#samplemeter' + i).find('.rfb2').addClass(orange);
             renderUnderneeth(5, i, rfcls);
         }
         if (n[4] == 1) {
-            $('#samplemeter' + i).find('.rfb4').addClass(orange);
+            $('#samplemeter' + i).find('.rfb3').addClass(orange);
             renderUnderneeth(4, i, rfcls);
         }
         if (n[3] == 1) {
-            $('#samplemeter' + i).find('.rfb5').addClass(yellow);
+            $('#samplemeter' + i).find('.rfb4').addClass(yellow);
             renderUnderneeth(3, i, rfcls);
         }
         if (n[2] == 1) {
-            $('#samplemeter' + i).find('.rfb6').addClass(yellow);
+            $('#samplemeter' + i).find('.rfb5').addClass(yellow);
             renderUnderneeth(2, i, rfcls);
         }
         if (rfbc.antenaLEDB == 1) {
-            $('#samplemeter' + i).find('.rfb7').addClass(blue);
+            $('#samplemeter' + i).find('.rfb6').addClass(blue);
         }
     }
 }
@@ -190,17 +190,15 @@ function renderUnderneeth(c, j, cls) {
 }
 function getColor(v) {
     var clr = greenyellow;
-    if (4 >= v <= 7) {
+    if (v < 5) {
         clr = orange;
-    } else if (v == 3 || v == 2) {
+    } else if (v == 5) {
         clr = yellow;
-    } else if (v == 1) {
-        clr = red;
+    } else if (v == 6) {
+        clr = blue;
     }
     return clr;
 }
-
-
 
 
 function audio(ai, reg) {

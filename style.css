@@ -26,6 +26,9 @@ body{
     background-color: gray;
     border-radius: 12px;
 }
+.audio .circle{
+    margin: 11.1px auto;
+}
 .greenyellow{
     background-color: greenyellow;   
 }
